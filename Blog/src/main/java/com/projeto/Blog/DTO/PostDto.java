@@ -5,6 +5,7 @@ import java.util.stream.Collectors;
 
 import com.projeto.Blog.models.Categoria;
 import com.projeto.Blog.models.Post;
+import com.projeto.Blog.models.Usuario;
 
 public class PostDto {
  private Long id;
@@ -20,6 +21,12 @@ public class PostDto {
 	 this.texto = post.getTexto();
 	 this.usuario = post.getUsuario().getNome();
 	 this.categoria = post.getCategoria();
+ }
+ 
+ public Post converter(UsuarioRepository userRepositorio) {
+	 Usuario user = userRepositorio.findByNome(usuario);
+	 Post post = new Post(titulo, texto, user);
+	 return post;
  }
  
  public static List<PostDto> converte(List<Post> lista){
