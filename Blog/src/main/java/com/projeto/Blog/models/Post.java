@@ -21,7 +21,7 @@ public class Post {
 	@Enumerated(EnumType.STRING)
 	private Categoria categoria;
 	
-	public Post() {
+	public Post(String titulo2, String texto2, Usuario user) {
 		this.titulo = "padrão";
 		this.texto = "padrão";
 		this.usuario = new Usuario();
