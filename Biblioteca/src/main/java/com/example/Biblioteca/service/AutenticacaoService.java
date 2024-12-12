@@ -1,5 +1,6 @@
 package com.example.Biblioteca.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -9,7 +10,8 @@ import com.example.Biblioteca.repository.UsuarioRepository;
 
 @Service
 public class AutenticacaoService implements UserDetailsService{
-
+	
+	@Autowired
 	private UsuarioRepository usuarioRepository;
 
 	@Override

@@ -23,7 +23,7 @@ public class JWTokenService {
 	public String gerarToken(Usuario usuario) {
  
 		try {
-			var algoritmo = Algorithm.HMAC256("123456");
+			var algoritmo = Algorithm.HMAC256(secret);
 			
 			return JWT.create()
 			.withIssuer("Aula de PWEB")

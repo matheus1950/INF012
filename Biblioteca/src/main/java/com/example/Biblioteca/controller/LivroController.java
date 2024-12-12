@@ -23,8 +23,8 @@ import jakarta.validation.Valid;
 public class LivroController {
 	private LivroService livroService;
 	
+	//@Secured("ROLE_USER")
 	@GetMapping
-	@Secured("ROLE_USER")
 	public List<LivroDto> listarTodos(){
 		return livroService.listarTodos();
 	}

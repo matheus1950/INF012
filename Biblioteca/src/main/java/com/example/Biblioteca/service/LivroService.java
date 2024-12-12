@@ -1,9 +1,10 @@
-package com.example.Biblioteca.service;
+	package com.example.Biblioteca.service;
 
 import java.net.URI;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -17,6 +18,7 @@ import jakarta.persistence.EntityNotFoundException;
 
 @Service
 public class LivroService {
+	@Autowired
 	LivroRepository repositorioLivro;
 	
 	

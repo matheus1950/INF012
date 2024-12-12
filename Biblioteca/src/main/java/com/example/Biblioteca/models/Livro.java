@@ -16,7 +16,9 @@ public class Livro {
 	private String autor;
 	private Integer anoPublicacao;
 	
-	
+	public Livro() {
+		
+	}
 	public int getId() {
 		return id;
 	}
