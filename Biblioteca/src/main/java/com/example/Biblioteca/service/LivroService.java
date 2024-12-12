@@ -2,6 +2,7 @@ package com.example.Biblioteca.service;
 
 import java.net.URI;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -11,6 +12,8 @@ import org.springframework.web.util.UriComponentsBuilder;
 import com.example.Biblioteca.dtos.LivroDto;
 import com.example.Biblioteca.models.Livro;
 import com.example.Biblioteca.repository.LivroRepository;
+
+import jakarta.persistence.EntityNotFoundException;
 
 @Service
 public class LivroService {
@@ -38,4 +41,20 @@ public class LivroService {
 	public List<LivroDto> listarTodos(){
 		return repositorioLivro.findAll().stream().map(LivroDto::new).toList();
 	}
+	
+	public void deletar(Long id) {		
+		repositorioLivro.deleteById(id);
+	}
+	
+	public void atualizar(LivroDto livroDto, Long id) {
+		Livro livroExistente = repositorioLivro.findById(id)
+				.orElseThrow(() -> new EntityNotFoundException("Livro não encontrado"));
+		
+		livroExistente.setTitulo(livroDto.titulo());
+        livroExistente.setAutor(livroDto.autor());
+        livroExistente.setAnoPublicacao(livroDto.anoPublicacao());
+        
+        repositorioLivro.save(livroExistente);		
+	}
+	
 }

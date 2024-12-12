@@ -1,9 +1,16 @@
 package com.example.Biblioteca.models;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 
 @Entity(name = "usuarios")
 public class Usuario {
@@ -12,7 +19,16 @@ public class Usuario {
 	private int id;
 	private String username;
 	private String password;
-	private Integer role;
+	private Role role;
+	/*
+	@ManyToMany(fetch = FetchType.EAGER)
+	@JoinTable(
+            name = "usuarios_roles",
+            joinColumns = @JoinColumn(name = "usuarios_id"),
+            inverseJoinColumns = @JoinColumn(name = "roles_id")
+            )
+	private List<Role> roles = new ArrayList<Role>();
+	*/
 	
 	
 	public int getId() {
@@ -33,10 +49,10 @@ public class Usuario {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	public Integer getRole() {
+	public Role getRole() {
 		return role;
 	}
-	public void setRole(Integer role) {
+	public void setRole(Role role) {
 		this.role = role;
 	}
 	

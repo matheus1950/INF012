@@ -24,8 +24,7 @@ public class PostService {
 		this.usuarioRepository = usuarioRepository;
 	}
 	
-	public List<PostDTO> listar() {
-		
+	public List<PostDTO> listar() {		
 		return postRepository.findAll().stream().map(PostDTO::new).toList();
 	}
 	
@@ -37,4 +36,4 @@ public class PostService {
 		return ResponseEntity.created(uri).body(new PostDTO(newPost));
 	}
 	
-}
+}	
