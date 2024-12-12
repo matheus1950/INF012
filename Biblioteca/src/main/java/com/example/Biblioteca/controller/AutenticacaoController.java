@@ -10,6 +10,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.Biblioteca.dtos.DadosAutenticacaoDto;
+import com.example.Biblioteca.dtos.DadosTokenJWT;
+import com.example.Biblioteca.models.Usuario;
+import com.example.Biblioteca.service.JWTokenService;
 
 @RestController
 @RequestMapping("/login")
@@ -23,10 +26,13 @@ import com.example.Biblioteca.dtos.DadosAutenticacaoDto;
 	 
 	 @PostMapping
 	 public ResponseEntity efetuarLogin(@RequestBody DadosAutenticacaoDto dados) {
-		 var token = new UsernamePasswordAuthenticationToken(dados.login(), dados.senha());
-		 var autentication= manager.authenticate(token);
-		 return ResponseEntity.ok(tokenService.gerarToken((Usuario)autentication.getPrincipal()));	 
-		 
+		 var authenticationToken = new 
+		 UsernamePasswordAuthenticationToken(dados.login(), dados.senha());
+         var authentication = manager.authenticate(authenticationToken);
+		  
+         var tokenJWT = tokenService.gerarToken((Usuario) 
+		 authentication.getPrincipal());
+		 return ResponseEntity.ok(new DadosTokenJWT(tokenJWT)); 		 
 	}
 	 
 }

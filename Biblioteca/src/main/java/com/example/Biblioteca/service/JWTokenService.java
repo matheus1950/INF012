@@ -4,18 +4,26 @@ import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import com.auth0.jwt.JWT;
+import com.auth0.jwt.algorithms.Algorithm;
+import com.auth0.jwt.exceptions.JWTCreationException;
+import com.auth0.jwt.exceptions.JWTVerificationException;
 import com.example.Biblioteca.models.Usuario;
+
+import jakarta.servlet.http.HttpServletRequest;
 
 @Service
 public class JWTokenService {
-
+	@Value(value = "\"${jwt.secret}")
+	private String secret;
 		 
 	public String gerarToken(Usuario usuario) {
  
 		try {
-			var algoritmo = Algorithm.HMAC256(secret);
+			var algoritmo = Algorithm.HMAC256("123456");
 			
 			return JWT.create()
 			.withIssuer("Aula de PWEB")
@@ -30,6 +38,27 @@ public class JWTokenService {
 	private Instant dataExpiracao() {
 		return LocalDateTime.now().plusHours(2).toInstant(ZoneOffset.of("-03:00"));
 	}
-		  
 	
+	
+	 public String getSubject(String tokenJWT) {
+         try {
+                 var algoritmo = Algorithm.HMAC256(secret);
+                return JWT.require(algoritmo)
+                                .withIssuer("Aula de PWEB")
+                                .build()
+                                .verify(tokenJWT)
+                                .getSubject();
+         } catch (JWTVerificationException exception) {
+                 throw new RuntimeException("Token JWT inválido ou expirado!");
+         }
+	 }
+	 
+	 public String recuperarToken(HttpServletRequest request) {
+		 var token = request.getHeader("Authorization");
+		        if (token == null || token.isEmpty() || !token.startsWith("Bearer ")) {
+		            return null;
+		        }
+		        return token.replace("Bearer ", "");
+	 }
+
 }
