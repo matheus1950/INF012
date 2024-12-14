@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
+import org.springframework.web.filter.OncePerRequestFilter;
 
 import com.example.Biblioteca.repository.UsuarioRepository;
 import com.example.Biblioteca.service.JWTokenService;
@@ -22,7 +23,7 @@ import jakarta.servlet.http.HttpServletResponse;
 
 @WebFilter(urlPatterns = "/api/**")
 @Component
-public class SecurityFilter implements Filter{
+public class SecurityFilter extends OncePerRequestFilter{
 	@Autowired
 	private JWTokenService tokenService;
 	
@@ -44,6 +45,7 @@ public class SecurityFilter implements Filter{
 	 
 	 public String recuperarToken(HttpServletRequest request) {
 		 var token = request.getHeader("Authorization");
+		 System.out.println("Token em authorization é: " + token);
 		        if (token == null || token.isEmpty() || !token.startsWith("Bearer ")) {
 		            return null;
 		        }
@@ -51,11 +53,13 @@ public class SecurityFilter implements Filter{
 	}
 
 	
+	 /*
 	@Override
 	public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
 		System.out.println("Requisição recebida em: " + LocalDateTime.now());
 		filterChain.doFilter(servletRequest, servletResponse);
 	}
+	*/
 	
 
 }

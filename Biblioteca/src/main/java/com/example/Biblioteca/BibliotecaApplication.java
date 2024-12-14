@@ -12,6 +12,7 @@ public class BibliotecaApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(BibliotecaApplication.class, args);
+
 		/*
 		 	BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 	        String senhaCriptografada = encoder.encode("123");

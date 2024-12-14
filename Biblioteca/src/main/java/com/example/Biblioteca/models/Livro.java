@@ -19,6 +19,19 @@ public class Livro {
 	public Livro() {
 		
 	}
+	
+	
+	
+	public Livro(int id, String titulo, String autor, Integer anoPublicacao) {
+		super();
+		this.id = id;
+		this.titulo = titulo;
+		this.autor = autor;
+		this.anoPublicacao = anoPublicacao;
+	}
+
+
+
 	public int getId() {
 		return id;
 	}

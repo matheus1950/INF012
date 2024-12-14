@@ -2,9 +2,12 @@ package com.example.Biblioteca.controller;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -21,6 +24,7 @@ import jakarta.validation.Valid;
 @RestController
 @RequestMapping("/livro")
 public class LivroController {
+	@Autowired
 	private LivroService livroService;
 	
 	//@Secured("ROLE_USER")
@@ -35,15 +39,15 @@ public class LivroController {
 		livroService.cadastrar(livroDto, uriBuilder);
 	}
 	
-	@DeleteMapping
+	@DeleteMapping("/{id}")
 	@Secured("ROLE_ADMIN")
-	public void deletarLivro(Long id) {
+	public void deletarLivro(@PathVariable Long id) {
 		livroService.deletar(id);
 	}
 	
-	@PutMapping
+	@PutMapping("/{id}")
 	@Secured("ROLE_ADMIN")
-	public void atualizarLivro(LivroDto livroDto, Long id) {
+	public void atualizarLivro(@RequestBody LivroDto livroDto, @PathVariable Long id) {
 		livroService.atualizar(livroDto, id);
 	}
 }

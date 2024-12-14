@@ -53,6 +53,7 @@ public class JWTokenService {
          }
 	 }
 	 
+	 /*
 	 public String recuperarToken(HttpServletRequest request) {
 		 var token = request.getHeader("Authorization");
 		        if (token == null || token.isEmpty() || !token.startsWith("Bearer ")) {
@@ -60,5 +61,6 @@ public class JWTokenService {
 		        }
 		        return token.replace("Bearer ", "");
 	 }
+	 */
 
 }
