@@ -52,15 +52,5 @@ public class JWTokenService {
                  throw new RuntimeException("Token JWT inválido ou expirado!");
          }
 	 }
-	 
-	 /*
-	 public String recuperarToken(HttpServletRequest request) {
-		 var token = request.getHeader("Authorization");
-		        if (token == null || token.isEmpty() || !token.startsWith("Bearer ")) {
-		            return null;
-		        }
-		        return token.replace("Bearer ", "");
-	 }
-	 */
 
 }

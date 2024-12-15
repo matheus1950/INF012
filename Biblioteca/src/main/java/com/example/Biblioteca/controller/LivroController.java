@@ -27,7 +27,7 @@ public class LivroController {
 	@Autowired
 	private LivroService livroService;
 	
-	//@Secured("ROLE_USER")
+	@Secured("ROLE_USER")
 	@GetMapping
 	public List<LivroDto> listarTodos(){
 		return livroService.listarTodos();
