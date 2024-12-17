@@ -4,9 +4,15 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
+@Data
 @Getter //no eclipse tem que ser manual a instalação do lombok
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity(name = "livros")
 public class Livro {
 	@Id
@@ -30,8 +36,7 @@ public class Livro {
 		this.anoPublicacao = anoPublicacao;
 	}
 
-
-
+	
 	public int getId() {
 		return id;
 	}
@@ -56,7 +61,6 @@ public class Livro {
 	public void setAnoPublicacao(Integer anoPublicacao) {
 		this.anoPublicacao = anoPublicacao;
 	}
-	
 	
 	
 	

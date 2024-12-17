@@ -25,14 +25,15 @@ import com.example.Biblioteca.service.JWTokenService;
 	 private JWTokenService tokenService;
 	 
 	 @PostMapping
-	 public ResponseEntity efetuarLogin(@RequestBody DadosAutenticacaoDto dados) {
-		 var authenticationToken = new 
-		 UsernamePasswordAuthenticationToken(dados.login(), dados.senha());
-         var authentication = manager.authenticate(authenticationToken);
-		  
-         var tokenJWT = tokenService.gerarToken((Usuario) 
-		 authentication.getPrincipal());
-		 return ResponseEntity.ok(new DadosTokenJWT(tokenJWT)); 		 
+	 public ResponseEntity<?> efetuarLogin(@RequestBody DadosAutenticacaoDto dados) {
+		 try {
+	            var authenticationToken = new UsernamePasswordAuthenticationToken(dados.login(), dados.senha());
+	            var authentication = manager.authenticate(authenticationToken);
+	            var tokenJWT = tokenService.gerarToken((Usuario) authentication.getPrincipal());
+	            return ResponseEntity.ok(new DadosTokenJWT(tokenJWT));
+	        } catch (Exception e) {
+	            return ResponseEntity.status(401).body("Usuário ou senha inválidos");
+	        }		 
 	}
 	 
 }

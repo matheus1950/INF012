@@ -3,6 +3,8 @@ package com.example.Biblioteca.security;
 import java.io.IOException;
 import java.time.LocalDateTime;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -27,6 +29,8 @@ public class SecurityFilter extends OncePerRequestFilter{
 	@Autowired
 	private JWTokenService tokenService;
 	
+	private static final Logger logger = LoggerFactory.getLogger(SecurityFilter.class);
+	
 	@Autowired
 	private UsuarioRepository usuarioRepository;
 	
@@ -35,10 +39,14 @@ public class SecurityFilter extends OncePerRequestFilter{
 		 var token = recuperarToken(request);
 		 System.out.println("Token: " + token);
 		 if(token!=null) {
-			 var login = tokenService.getSubject(token);
-			 var usuario = usuarioRepository.findByUsername(login);
-			 var authentication = new UsernamePasswordAuthenticationToken(usuario, null, usuario.getAuthorities());
-			 SecurityContextHolder.getContext().setAuthentication(authentication);
+			 try {
+	                var login = tokenService.getSubject(token);
+	                var usuario = usuarioRepository.findByUsername(login);
+	                var authentication = new UsernamePasswordAuthenticationToken(usuario, null, usuario.getAuthorities());
+	                SecurityContextHolder.getContext().setAuthentication(authentication);
+	            } catch (Exception e) {
+	                logger.error("Token inválido", e);
+	            }
 		 }
 		 filterChain.doFilter(request, response);
 	 }
