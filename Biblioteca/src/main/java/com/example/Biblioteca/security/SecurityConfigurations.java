@@ -23,16 +23,28 @@ public class SecurityConfigurations {
 	@Autowired
 	 private SecurityFilter securityFilter;
 	
-	  @Bean
-	  public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception{
-		  return http.csrf(csrf -> csrf.disable()).sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+	 @Bean
+	    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+	        return http
+	            .csrf(csrf -> csrf.disable())
+	            .sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
 	            .authorizeHttpRequests(req -> {
-	                req.requestMatchers(HttpMethod.POST, "/login").permitAll();
+	                // Libera o acesso ao Swagger e ao endpoint de login
+	                req.requestMatchers(
+	                    "/swagger-ui/**",
+	                    "/v3/api-docs/**",
+	                    "/swagger-resources/**",
+	                    "/webjars/**",
+	                    "/error",
+	                    "/login"
+	                ).permitAll();
+	                
+	                // Protege todas as outras rotas
 	                req.anyRequest().authenticated();
 	            })
 	            .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)
 	            .build();
-	  }
+	    }
 
 	
 	@Bean
