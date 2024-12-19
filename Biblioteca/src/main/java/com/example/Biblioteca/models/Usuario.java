@@ -23,6 +23,8 @@ import lombok.Data;
 @Data
 @Entity(name = "usuarios")
 public class Usuario implements UserDetails{
+
+	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
