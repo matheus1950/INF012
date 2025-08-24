@@ -7,6 +7,6 @@ Este repositório contém os projetos e exercícios desenvolvidos para a discipl
 
 - **Biblioteca:** Exercício backend de uma aplicação para gerenciamento de biblioteca.
 - **Blog:** Exercício de um backend de blog.
-- **Pets:** Exercício prático sobre desenvolvimento backend de uma aplicação para gerenciamento de pets (`exercicio pets`).
+- **Pets:** Exercício prático sobre desenvolvimento backend de uma aplicação para gerenciamento de pets.
 - **hello-spring:** Aplicação inicial "Hello World" usando o framework Spring.
 ---
