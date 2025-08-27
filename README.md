@@ -5,7 +5,7 @@ Este repositório contém os projetos e exercícios desenvolvidos para a discipl
 ---
 ### Estrutura dos Projetos
 
-- **Biblioteca:** Exercício backend de uma aplicação para gerenciamento de biblioteca.
+- **Biblioteca:** Exercício backend de uma aplicação para gerenciamento de biblioteca. Conta com testes de endpoint feitos no Insomnia.
 - **Blog:** Exercício de um backend de blog.
 - **Pets:** Exercício prático sobre desenvolvimento backend de uma aplicação para gerenciamento de pets.
 - **hello-spring:** Aplicação inicial "Hello World" usando o framework Spring.
